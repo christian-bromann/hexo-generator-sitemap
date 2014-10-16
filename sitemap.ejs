@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <% posts.forEach(function(post){ %>
+  <% posts.forEach(function(post){ 
+    if(post.permalink.indexOf('.html') < 0) {
+      return;
+    }
+    %>
   <url>
     <loc><%- encodeURI(post.permalink) %></loc>
     <lastmod><%= post.updated.toDate().toISOString() || post.date.toDate().toISOString() %></lastmod>
@@ -8,14 +12,22 @@
     <priority><%= sitemap.post_priority %></priority>
   </url>
   <% }) %>
-  <% tags.forEach(function(tag){ %>
+  <% tags.forEach(function(tag){ 
+    if(tag.permalink.indexOf('.html') < 0) {
+      return;
+    }
+    %>
   <url>
     <loc><%- encodeURI(tag.permalink) %></loc>
     <changefreq><%= sitemap.tag_changefreq %></changefreq>
     <priority><%= sitemap.tag_priority %></priority>
   </url>
   <% }) %>
-  <% categories.forEach(function(category){ %>
+  <% categories.forEach(function(category){ 
+    if(category.permalink.indexOf('.html') < 0) {
+      return;
+    }
+    %>
   <url>
     <loc><%- encodeURI(category.permalink) %></loc>
     <changefreq><%= sitemap.category_changefreq %></changefreq>
